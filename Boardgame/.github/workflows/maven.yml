@@ -25,4 +25,22 @@ stages:
                 sonarQubeRunAnalysis: false
 
 
+#s2                          j2  steps:
+stages:
+  - stage:
+    displayName: 'mavencompile'
+    jobs:
+      - job: compile
+        steps:
+             - task: Maven@4
+               inputs:
+                 mavenPomFile: 'Boardgame/pom.xml'
+                 publishJUnitResults: true
+                 testResultsFiles: '**/surefire-reports/TEST-*.xml'
+                 javaHomeOption: 'JDKVersion'
+                 mavenVersionOption: 'Default'
+                 mavenAuthenticateFeed: false
+                 effectivePomSkip: false
+                 sonarQubeRunAnalysis: false
+
 
