@@ -1,0 +1,45 @@
+trigger:
+  none
+
+pool:
+ name: hellopool
+ demands:
+   - agent.name equals helloagent
+
+stages:
+  - stage: 'maven_compile'
+    displayName: compile
+    jobs:
+      - job: compile
+        displayName: compile
+        steps: 
+          - task: Maven@4
+            inputs:
+              azureSubscription: 'Azure subscription 1 (596a6eb2-30ab-44f6-97f0-f734a11089f1)'
+              mavenPomFile: 'Boardgame/pom.xml'
+              goals: 'compile'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
+
+  - stage: 'maven_package'
+    displayName: package
+    jobs:
+      - job: package
+        displayName: package
+        steps:
+          - task: Maven@4
+            inputs:
+              azureSubscription: 'Azure subscription 1 (596a6eb2-30ab-44f6-97f0-f734a11089f1)'
+              mavenPomFile: 'Boardgame/pom.xml'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
