@@ -4,7 +4,7 @@ trigger:
 pool:
  name: hellopool
  demands:
-   - agent.name equals helloagent
+   - agent.name -equals helloagent
 
 stages:
   - stage: 'maven_compile'
