@@ -1,23 +1,25 @@
-# yaml for acr build and push 
-
+#yaml pipeline for java project
 trigger:
   none
 
 pool:
-  vmImasge: ubuntu-latest
+ vmImage: ubuntu-latest
+ demands:
 
 stages:
-  - stage:
+  - stage: 
+    displayName: 
     jobs:
-      - job: "package"
+      - job: package
         steps:
-        - task: Maven@4
-          inputs:
-            mavenPomFile: 'Boardgame/pom.xml'
-            publishJUnitResults: true
-            testResultsFiles: '**/surefire-reports/TEST-*.xml'
-            javaHomeOption: 'JDKVersion'
-            mavenVersionOption: 'Default'
-            mavenAuthenticateFeed: false
-            effectivePomSkip: false
-            sonarQubeRunAnalysis: false
+          - task: Maven@4
+            inputs:
+              azureSubscription: 'Azure subscription 1 (596a6eb2-30ab-44f6-97f0-f734a11089f1)'
+              mavenPomFile: 'pom.xml'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
