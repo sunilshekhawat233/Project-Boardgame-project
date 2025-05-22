@@ -3,8 +3,13 @@ trigger:
 
 pool:
  vmImage: ubuntu-latest
- 
-steps:
-- script: echo hello world!
-  displayName: "Run a script withat stage explicitly defined"
-- bash: echo "hello world"
+
+stages:
+  - stage: stagename1
+    displayName: displaya
+    jobs:
+      - job: joba
+  - stage: stage2
+    displayName: display b
+    jobs:
+      - job: jobb
