@@ -1,0 +1,10 @@
+trigger:
+- master
+
+pool:
+ vmImage: ubuntu-latest
+ 
+steps:
+- script: echo hello world!
+  displayName: "Run a script withat stage explicitly defined"
+- bash: echo "hello world"
